@@ -1,0 +1,13 @@
+---
+- name: install wifi dongle firmware
+  get_url: url=https://daemonizer.de/prism54/prism54-fw/fw-usb/2.13.25.0.lm87.arm
+           dest=/lib/firmware/isl3887usb
+           checksum=sha256:4f4f5c523d7eab58f98d3f334d9adf1e626c2fde31b32347f5cede75fb92ad60
+           validate_certs=no
+  notify: reload p54usb module
+
+- name: clear network interfaces configuration file
+  copy: src=interfaces dest=/etc/network/interfaces
+
+- name: configure network interfaces
+  template: src=wlan0 dest=/etc/network/interfaces.d/wlan0

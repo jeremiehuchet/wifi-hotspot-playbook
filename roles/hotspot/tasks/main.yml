@@ -1,0 +1,16 @@
+---
+- name: install wifi hotspot packages
+  package: name=hostapd state=present
+
+- name: configure wifi hotspot
+  template: src=hostapd.conf dest=/etc/hostapd/{{ hotspot_ssid }}.conf
+  notify: restart wifi hotspot
+
+- name: configure hostapd service
+  lineinfile: dest=/etc/default/hostapd
+              regexp='^#?DAEMON_CONF=.*'
+              line='DAEMON_CONF=/etc/hostapd/{{ hotspot_ssid }}.conf'
+  notify: restart wifi hotspot
+
+- name: enable hostapd service
+  service: name=hostapd enabled=yes

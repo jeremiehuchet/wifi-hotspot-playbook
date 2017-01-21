@@ -1,0 +1,15 @@
+- name: install dhcp server
+  package: name=udhcpd state=present
+
+- name: enable dhcp server
+  service: name=udhcpd enabled=yes
+
+- name: configure dhcp server
+  template: src=udhcp.conf dest=/etc/udhcp.conf
+  notify: restart dhcp server
+
+- name: enable dhcp server
+  lineinfile: dest=/etc/default/udhcpd
+              regexp='^#?DHCPD_ENABLED="no"'
+              line='#DHCPD_ENABLED="no"'
+  notify: restart dhcp server

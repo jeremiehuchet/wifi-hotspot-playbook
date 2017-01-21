@@ -1,0 +1,4 @@
+allow-hotplug wlan0
+iface wlan0 inet static
+    address {{ hotspot_ip }}
+    netmask {{ hotspot_netmask }}

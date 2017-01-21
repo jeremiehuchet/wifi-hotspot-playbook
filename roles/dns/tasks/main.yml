@@ -1,0 +1,16 @@
+---
+- name: install dnsmasq
+  package: name=dnsmasq state=present
+
+- name: enable dnsmasq service
+  service: name=dnsmasq enabled=yes
+
+- name: configure dnsmasq
+  template: src=dnsmasq.conf dest=/etc/dnsmasq.conf
+  notify: restart dnsmasq
+
+- name: configure dns
+  lineinfile: dest=/etc/resolvconf.conf
+              line='name_servers=8.8.8.8'
+              regexp='^#?name_servers=.*'
+              state=present

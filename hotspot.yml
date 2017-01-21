@@ -1,0 +1,13 @@
+---
+- name: install wifi hotspot
+  hosts: all
+  remote_user: pi
+  become: yes
+  become_user: root
+
+  roles:
+    - p54usb_dongle
+    - dhcp_server
+    - hotspot
+    - dns
+    - router
