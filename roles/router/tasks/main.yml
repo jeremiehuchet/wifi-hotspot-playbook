@@ -15,6 +15,13 @@
               state=present
   notify: restart shorewall
 
+- name: enable forwarded traffic shaping
+  lineinfile: dest=/etc/shorewall/shorewall.conf
+              line='MARK_IN_FORWARD_CHAIN=Yes'
+              regexp='^MARK_IN_FORWARD_CHAIN=.*'
+              state=present
+  notify: restart shorewall
+
 - name: configure shorewall
   copy: src={{ item }} dest=/etc/shorewall/
   with_items:
