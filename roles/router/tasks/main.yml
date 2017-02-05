@@ -2,18 +2,28 @@
 - name: enable ip forwarding
   sysctl: name=net.ipv4.ip_forward value=1 state=present
 
-- name: install iptables packages
-  package: name={{ item }} state=present
-  with_items:
-  - iptables
-  - iptables-persistent
+- name: install shorewall packages
+  package: name=shorewall state=present
 
-- name: install iptables startup script
-  copy: src=iptables.service dest=/etc/init.d/iptables mode=0755
+- name: enable shorewall service
+  service: name=shorewall enabled=yes
 
-- name: install iptables rules
-  template: src={{ item }} dest=/etc/iptables/
+- name: enable shorewall startup
+  lineinfile: dest=/etc/default/shorewall
+              line='startup=1'
+              regexp='^startup=.*'
+              state=present
+  notify: restart shorewall
+
+- name: configure shorewall
+  copy: src={{ item }} dest=/etc/shorewall/
   with_items:
-  - rules.v4
-  - rules.v6
-  notify: reload iptables rules
+  - interfaces
+  - policy
+  - rules
+  - masq
+  - tcdevices
+  - tcclasses
+  - mangle
+  - accounting
+  notify: restart shorewall

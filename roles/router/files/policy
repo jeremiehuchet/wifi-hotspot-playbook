@@ -1,0 +1,7 @@
+###############################################################################
+#SOURCE         DEST            POLICY          LOG LEVEL       LIMIT:BURST
+$FW             priv            ACCEPT
+priv            wifi            ACCEPT
+wifi            priv            DROP            info
+# THE FOLLOWING POLICY MUST BE LAST
+all             all             REJECT          info

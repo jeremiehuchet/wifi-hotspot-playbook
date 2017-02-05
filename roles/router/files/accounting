@@ -1,0 +1,5 @@
+#ACTION    CHAIN   SOURCE  DEST    PROTO   DPORT   SPORT   USER    MARK    IPSEC
+web        -       eth0    wlan0   tcp     -       80,443
+web        -       wlan0   eth0    tcp     80,443
+COUNT      web     eth0    wlan0
+COUNT      web     wlan0   eth0

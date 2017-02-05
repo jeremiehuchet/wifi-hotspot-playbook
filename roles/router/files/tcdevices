@@ -1,0 +1,2 @@
+1:eth0    30mbit   30mbit   classify
+2:wlan0   12mbit   12Mbit   classify

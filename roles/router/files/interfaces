@@ -1,0 +1,2 @@
+wifi    wlan0    -     dhcp,tcpflags,nosmurfs,routefilter,logmartians
+priv    eth0     -     tcpflags,nosmurfs,routefilter,logmartians

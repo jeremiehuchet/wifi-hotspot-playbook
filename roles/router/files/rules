@@ -1,0 +1,5 @@
+#ACTION         SOURCE   DEST   PROTO   DPORT   SPORT   ORIGDEST
+SSH(ACCEPT)     priv     $FW    TCP     22
+DNS(ACCEPT)     wifi     $FW    UDP     53
+DNS(ACCEPT)     wifi     $FW    TCP     53
+HTTP(ACCEPT)    wifi     priv   TCP     80,443

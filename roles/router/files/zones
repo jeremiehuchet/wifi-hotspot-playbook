@@ -1,0 +1,4 @@
+#ZONE     TYPE     OPTIONS         IN OPTIONS        OUT OPTIONS
+fw        firewall
+priv      ipv4
+wifi      ipv4

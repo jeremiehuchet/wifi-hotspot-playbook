@@ -1,3 +1,3 @@
 ---
-- name: reload iptables rules
-  service: name=iptables state=reloaded
+- name: restart shorewall
+  service: name=shorewall state=restarted

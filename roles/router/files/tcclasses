@@ -1,0 +1,5 @@
+#INTERFACE  MARK  RATE    CEIL      PRIORITY    OPTIONS
+1:110       -     full    full      1           default
+1:130       -     full/30 full/30   3
+2:110       -     full    full      1           default
+2:130       -     full/10 full/10   3
