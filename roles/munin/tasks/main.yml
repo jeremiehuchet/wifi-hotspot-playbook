@@ -1,0 +1,32 @@
+---
+- name: install munin
+  package: name={{ item }} state=present
+  with_items:
+  - munin
+  - lighttpd
+
+- name: enable munin service
+  service: name=munin-node enabled=yes
+
+- name: enable web server
+  service: name=lighttpd enabled=yes
+
+- name: configure munin vhost
+  copy: src=lighttpd.conf dest=/etc/lighttpd/conf-available/00-munin.conf
+  notify: restart lighttpd
+
+- name: enable munin vhost
+  file: src=/etc/lighttpd/conf-available/00-munin.conf
+        dest=/etc/lighttpd/conf-enabled/00-munin.conf
+        state=link
+  notify: restart lighttpd
+
+- name: install shorewall plugin
+  get_url: url=https://raw.githubusercontent.com/munin-monitoring/contrib/master/plugins/network/shorewall-accounting_
+           dest=/etc/munin/plugins/shorewall_accounting
+           mode=0755
+  notify: restart munin
+
+- name: enable shorewall plugin
+  copy: src=plugin-conf.d/shorewall
+        dest=/etc/munin/plugin-conf.d/shorewall
