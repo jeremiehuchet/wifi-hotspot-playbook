@@ -1,3 +1,0 @@
----
-- name: restart dhcp server
-  service: name=udhcpd state=restarted

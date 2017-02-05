@@ -7,7 +7,6 @@
 
   roles:
     - p54usb_dongle
-    - dhcp_server
+    - dnsmasq
     - hotspot
-    - dns
     - router
